@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Onsen UI App</title>
+
+  <link rel="stylesheet" type="text/css" href="style.css">
+
+</head>
+
+<body>
+
+  <div id="styler">
+    <div class="styler-ios">iOS Style</div>
+    <div class="styler-android">MD Style</div>
+  </div>
+
+  <div id="cover-ios">
+    <iframe id="child-iframe-ios" class="inner-iframes" scrolling="no"></iframe>
+  </div>
+
+  <div id="cover-android" style="display: none">
+    <iframe id="child-iframe-android" class="inner-iframes" scrolling="no"></iframe>
+  </div>
+
+
+  <script>
+    var appSrc = window.frameElement.getAttribute('app-src').trim();
+    document.getElementById('child-iframe-ios').setAttribute('src', appSrc);
+    document.getElementById('child-iframe-android').setAttribute('src', appSrc + (appSrc.indexOf('?') >= 0 ? '&' : '?') + 'platform=android');
+
+    var styler = document.getElementById('styler'),
+      iosCover = document.getElementById('cover-ios');
+      androidCover = document.getElementById('cover-android');
+
+    styler.onclick = function() {
+      var IEdoesNotSupportES6 = iosCover.style.display;
+      iosCover.style.display = androidCover.style.display;
+      androidCover.style.display = IEdoesNotSupportES6;
+
+      styler.classList.toggle('flipped');
+    };
+  </script>
+
+</body>
+</html>
