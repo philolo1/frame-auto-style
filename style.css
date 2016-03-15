@@ -6,7 +6,7 @@
   padding: 78px 19px 78px 19px;
   vertical-align: middle;
   margin-bottom: 30px;
-  background-image: url('https://onsen.io/blog/content/images/mockups/iphone6plus_halfpage.png')
+  background-image: url('./mockups/iphone6plus-350.png')
 }
 
 #cover-android {
@@ -17,7 +17,7 @@
   padding: 61px 13px 56px 11px;
   vertical-align: middle;
   margin-bottom: 30px;
-  background-image: url('https://onsen.io/blog/content/images/mockups/nexus5_halfpage.png')
+  background-image: url('./mockups/nexus5-350.png')
 }
 
 .inner-iframes {
