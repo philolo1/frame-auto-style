@@ -1,47 +1,61 @@
-#cover-ios {
+#wrapper {
+  width: 350px;
+  height: 750px;
+  overflow: hidden;
+  position: relative;
+}
+
+#mockup {
   box-sizing: border-box;
   background-size: contain;
   width: 350px;
   height: 705px;
-  padding: 78px 19px 78px 19px;
+  padding: 78px 20px 80px 20px;
   vertical-align: middle;
   margin-bottom: 30px;
-  background-image: url('./mockups/iphone6plus-350.png')
 }
 
-#cover-android {
-  box-sizing: border-box;
-  background-size: contain;
-  width: 350px;
-  height: 700px;
-  padding: 61px 13px 56px 11px;
-  vertical-align: middle;
-  margin-bottom: 30px;
-  background-image: url('./mockups/nexus5-350.png')
+.mockup-ios {
+  background-image: url('./mockups/iphone6plus_350x705.png');
 }
 
-.inner-iframes {
+.mockup-android {
+  background-image: url('./mockups/nexus4_350x705.png');
+}
+
+#mockup iframe {
   width: 100%;
   height: 100%;
-  box-shadow: 0 0 1px 1px;
   border: 0;
+  opacity: 0;
+  transition: 0.9s ease-in-out opacity;
 }
 
+#mockup iframe.loaded {
+  opacity: 1;
+}
+
+#placeholder {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -57px;
+  margin-left: -54px;
+  animation: pulse 0.5s ease-in-out infinite alternate;
+}
 
 /* Toggle button */
 #styler {
-  position: absolute;
-  top: 30px;
-  left: 30px;
-  color: #FFF;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  color: #FC3429;
   font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
   font-size: 14px;
-  width: 80px;
+  width: 100%;
   height: 30px;
   text-align: center;
   line-height: 30px;
   border: 0;
-  cursor: pointer;
   text-decoration: none;
   -webkit-touch-callout: none; /* iOS Safari */
   -webkit-user-select: none;   /* Chrome/Safari/Opera */
@@ -53,34 +67,35 @@
 
 .styler-ios,
 .styler-android {
-  -webkit-backface-visibility: hidden;
-          backface-visibility: hidden;
-  -webkit-transition: -webkit-transform 0.3s;
-          transition: transform 0.3s;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
+  cursor: pointer;
+  width: 80px;
   height: 100%;
+  display: inline-block;
+}
+
+.selected {
   background-color: #FC3429;
+  color: #FFF;
 }
 
-.styler-ios {
-  border-radius: 8px;
+@-webkit-keyframes pulse {
+  from {
+    -webkit-transform: scale(1.5);
+            transform: scale(1.5);
+  }
+  to {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
 }
 
-.styler-android {
-  border-radius: 2px;
-  -webkit-transform: rotateY(-180deg);
-          transform: rotateY(-180deg);
-}
-
-#styler.flipped .styler-ios {
-  -webkit-transform: rotateY(-180deg);
-          transform: rotateY(-180deg);
-}
-
-#styler.flipped .styler-android {
-  -webkit-transform: rotateY(0);
-          transform: rotateY(0);
+@keyframes pulse {
+  from {
+    -webkit-transform: scale(1.5);
+            transform: scale(1.5);
+  }
+  to {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
 }
