@@ -5,21 +5,23 @@
   <title>Onsen UI App</title>
 
   <link rel="stylesheet" type="text/css" href="style.css">
-
 </head>
 
 <body>
 
   <div id="wrapper">
+    <!-- Styler tabbar -->
     <div id="styler">
       <label class="styler-ios">iOS Style</label>
       <label class="styler-android">MD Style</label>
     </div>
 
+    <!-- App -->
     <div id="mockup">
       <iframe id="app-iframe" scrolling="no"></iframe>
     </div>
 
+    <!-- Placeholder -->
     <div id="placeholder">
       <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
        width="86.000000pt" height="81.000000pt" viewBox="0 0 86.000000 81.000000"
@@ -43,33 +45,26 @@
       </svg>
     </div>
 
+    <!-- Preload images -->
+    <div class="mockup-ios mockup-android" style="display: none"></div>
   </div>
-
-  <div class="mockup-ios mockup-android" style="display: none"></div>
 
 
   <script>
+
+    // Default selected platform
     var defaultPlatform = (window.frameElement.getAttribute('default-platform') || '').trim().toLowerCase();
     if (['ios', 'android'].indexOf(defaultPlatform) === -1) {
       defaultPlatform = 'ios';
     }
 
+    // Add mockup
     document.querySelector('#mockup').classList.add('mockup-' + defaultPlatform);
     document.querySelector('.styler-' + defaultPlatform).classList.add('selected');
 
+    // Hide scrollbar
     var style = document.createElement('style');
     style.innerHTML = '.hide-scrollbar ::-webkit-scrollbar { display: none }';
-
-    document.querySelector('#app-iframe').onload = function() {
-      window.frames[0].ons.platform.select(defaultPlatform);
-      window.frames[0].document.body.appendChild(style);
-      window.frames[0].document.body.classList.add('hide-scrollbar');
-      document.querySelector('#placeholder').remove();
-      document.querySelector('#app-iframe').classList.add('loaded');
-    };
-
-    var appSrc = window.frameElement.getAttribute('app-src').trim();
-    document.querySelector('#app-iframe').setAttribute('src', appSrc);
 
     var styler = {
       ios: document.querySelector('.styler-ios'),
@@ -80,16 +75,32 @@
     var onClick = function(platform) {
       if (platform !== selected) {
         selected = platform;
-        styler.ios.classList.toggle('selected');
-        styler.android.classList.toggle('selected');
         window.frames[0].ons.forcePlatformStyling(platform);
-        document.querySelector('#mockup').classList.toggle('mockup-ios');
-        document.querySelector('#mockup').classList.toggle('mockup-android');
+        Object.keys(styler).forEach(function(p) {
+          styler[p].classList.toggle('selected');
+          document.querySelector('#mockup').classList.toggle('mockup-' + p);
+        });
       }
     };
 
-    styler.ios.onclick = onClick.bind(null, 'ios');
-    styler.android.onclick = onClick.bind(null, 'android');
+    // Apply everything when the iframe is ready
+    document.querySelector('#app-iframe').onload = function() {
+      window.frames[0].ons.platform.select(defaultPlatform);
+
+      window.frames[0].document.body.appendChild(style);
+      window.frames[0].document.body.classList.add('hide-scrollbar');
+
+      styler.ios.onclick = onClick.bind(null, 'ios');
+      styler.android.onclick = onClick.bind(null, 'android');
+
+      document.querySelector('#placeholder').remove();
+      document.querySelector('#app-iframe').classList.add('loaded');
+    };
+
+    // Set source URL
+    var appSrc = window.frameElement.getAttribute('app-src').trim();
+    document.querySelector('#app-iframe').setAttribute('src', appSrc);
+
   </script>
 
 </body>
