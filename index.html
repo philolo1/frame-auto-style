@@ -52,12 +52,16 @@
 
   <script>
 
+    var getParam = function(param) {
+      var regex = new RegExp(param + '=([^&]+)');
+      return ((window.location.search.match(regex) || [])[1] || '');
+    };
+
     // Default selected platform
-    var defaultPlatform = (window.frameElement.getAttribute('default-platform') || '').trim().toLowerCase();
+    var defaultPlatform = getParam('platform').trim().toLowerCase();
     if (['ios', 'android'].indexOf(defaultPlatform) === -1) {
       defaultPlatform = 'ios';
     }
-
     // Add mockup
     document.querySelector('#mockup').classList.add('mockup-' + defaultPlatform);
     document.querySelector('.styler-' + defaultPlatform).classList.add('selected');
@@ -98,7 +102,7 @@
     };
 
     // Set source URL
-    var appSrc = window.frameElement.getAttribute('app-src').trim();
+    var appSrc = getParam('src').trim();
     document.querySelector('#app-iframe').setAttribute('src', appSrc);
 
   </script>
