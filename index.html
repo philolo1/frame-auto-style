@@ -79,7 +79,7 @@
     var onClick = function(platform) {
       if (platform !== selected) {
         selected = platform;
-        window.frames[0].ons.forcePlatformStyling(platform);
+        window.frames[0]._superSecretOns.forcePlatformStyling(platform);
         Object.keys(styler).forEach(function(p) {
           styler[p].classList.toggle('selected');
           document.querySelector('#mockup').classList.toggle('mockup-' + p);
@@ -89,7 +89,7 @@
 
     // Apply everything when the iframe is ready
     document.querySelector('#app-iframe').onload = function() {
-      window.frames[0].ons.platform.select(defaultPlatform);
+      window.frames[0]._superSecretOns.platform.select(defaultPlatform);
 
       window.frames[0].document.body.appendChild(style);
       window.frames[0].document.body.classList.add('hide-scrollbar');
