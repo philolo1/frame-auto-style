@@ -48,7 +48,7 @@
 #styler {
   margin-top: 5px;
   margin-bottom: 5px;
-  color: #FC3429;
+  color: #05C1E3;
   font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
   font-size: 14px;
   width: 100%;
@@ -74,7 +74,7 @@
 }
 
 .selected {
-  background-color: #FC3429;
+  background-color: #05C1E3;
   color: #FFF;
 }
 
